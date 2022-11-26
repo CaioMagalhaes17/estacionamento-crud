@@ -5,7 +5,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
     employee.id = i + 1;
   });
 
-  const formatter = new Intl.NumberFormat('en-US', {
+  const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: null,
@@ -16,14 +16,14 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
       <table className="striped-table">
         <thead>
           <tr>
-            <th>No.</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Salary</th>
-            <th>Date</th>
+            <th>ID</th>
+            <th className="text-center">Token</th>
+            <th>Data</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Saída</th>
+            <th>Custo</th>
             <th colSpan={2} className="text-center">
-              Actions
+              Ações
             </th>
           </tr>
         </thead>
@@ -32,17 +32,17 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
             employees.map((employee, i) => (
               <tr key={employee.id}>
                 <td>{i + 1}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.email}</td>
-                <td>{formatter.format(employee.salary)}</td>
-                <td>{employee.date} </td>
+                <td>{employee.token}</td>
+                <td>{employee.data}</td>
+                <td>{employee.horaEntr}</td>
+                <td>{employee.horaSaida}</td>
+                <td>{formatter.format(employee.custo)}</td>
                 <td className="text-right">
                   <button
                     onClick={() => handleEdit(employee.id)}
                     className="button muted-button"
                   >
-                    Edit
+                    Marcar hora de saida
                   </button>
                 </td>
                 <td className="text-left">

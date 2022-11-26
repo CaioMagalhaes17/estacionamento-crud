@@ -4,31 +4,26 @@ import Swal from 'sweetalert2';
 const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   const id = selectedEmployee.id;
 
-  const [firstName, setFirstName] = useState(selectedEmployee.firstName);
-  const [lastName, setLastName] = useState(selectedEmployee.lastName);
-  const [email, setEmail] = useState(selectedEmployee.email);
-  const [salary, setSalary] = useState(selectedEmployee.salary);
-  const [date, setDate] = useState(selectedEmployee.date);
+  const [horaSaida, setHoraSaida] = useState(selectedEmployee.horaSaida);
+  const [custo, setCusto] = useState(selectedEmployee.custo);
+  const [token, setToken] = useState(selectedEmployee.token);
+  const [data, setData] = useState(selectedEmployee.data);
+  const [horaEntr, setHoraEntr] = useState(selectedEmployee.horaEntr);
+  
 
   const handleUpdate = e => {
     e.preventDefault();
-
-    if (!firstName || !lastName || !email || !salary || !date) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'All fields are required.',
-        showConfirmButton: true,
-      });
-    }
-
+    console.log(horaSaida.replace(/\D/g, ""), horaEntr.replace(/\D/g, ""))
+    var custo = (horaSaida.replace(/\D/g, "") - horaEntr.replace(/\D/g, ""));
+    custo = 10 * (custo/100);
+    setCusto(custo);
     const employee = {
       id,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
+      horaSaida,
+      token,
+      data,
+      horaEntr,
+      custo
     };
 
     for (let i = 0; i < employees.length; i++) {
@@ -54,46 +49,41 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
   return (
     <div className="small-container">
       <form onSubmit={handleUpdate}>
-        <h1>Edit Employee</h1>
-        <label htmlFor="firstName">First Name</label>
+        <h1>Marcar Hora de Saida</h1>
+        <label htmlFor="token">Token</label>
         <input
-          id="firstName"
+          id="token"
           type="text"
-          name="firstName"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
+          name="token"
+          defaultValue={token}
+          readOnly
+          onMouseOver={e => setToken(e.target.defaultValue)}
         />
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="data">Data</label>
         <input
-          id="lastName"
-          type="text"
-          name="lastName"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label htmlFor="salary">Salary ($)</label>
-        <input
-          id="salary"
-          type="number"
-          name="salary"
-          value={salary}
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
+          id="data"
           type="date"
-          name="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
+          name="data"
+          readOnly
+          defaultValue={data}
+          onMouseOver={e => setData(e.target.defaultValue)}
+        />
+        <label htmlFor="horaEntr">Hora Entrada</label>
+        <input
+          id="horaEntr"
+          type="time"
+          name="horaEntr"
+          readOnly
+          defaultValue={horaEntr}
+          onMouseOver={e => setHoraEntr(e.target.defaultValue)}
+        />
+        <label htmlFor="horaSaida">Hora de Saida</label>
+        <input
+          id="horaSaida"
+          type="time"
+          name="horaSaida"
+          value={horaSaida}
+          onChange={e => setHoraSaida(e.target.value)}
         />
         <div style={{ marginTop: '30px' }}>
           <input type="submit" value="Update" />

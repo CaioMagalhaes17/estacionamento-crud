@@ -32,7 +32,7 @@ const Logout = ({ setIsAuthenticated }) => {
       className="muted-button"
       onClick={handleLogout}
     >
-      Logout
+      Sair
     </button>
   );
 };

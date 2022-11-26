@@ -1,33 +1,25 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import md5 from 'md5';
+
+const random = md5(Math.floor(Math.random() * 6) + 1);
+var today = new Date();
+var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); 
 
 const Add = ({ employees, setEmployees, setIsAdding }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [salary, setSalary] = useState('');
-  const [date, setDate] = useState('');
+  const [token, setToken] = useState('');
+  const [data, setData] = useState('');
+  const [horaEntr, setHoraEntr] = useState('');
 
   const handleAdd = e => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !salary || !date) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'All fields are required.',
-        showConfirmButton: true,
-      });
-    }
-
     const id = employees.length + 1;
     const newEmployee = {
       id,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
+      token,
+      data,
+      horaEntr,
     };
 
     employees.push(newEmployee);
@@ -35,58 +27,47 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
     setEmployees(employees);
     setIsAdding(false);
 
+    setToken(random);
+    setData(currentDate);
+    setHoraEntr(today.getHours() + ':' + today.getMinutes());
+
     Swal.fire({
       icon: 'success',
       title: 'Added!',
-      text: `${firstName} ${lastName}'s data has been Added.`,
+      text: `Adicionado com Sucesso !`,
       showConfirmButton: false,
       timer: 1500,
     });
   };
 
+
   return (
     <div className="small-container">
       <form onSubmit={handleAdd}>
-        <h1>Add Employee</h1>
-        <label htmlFor="firstName">First Name</label>
+        <h1>Adicionar </h1>
+        <label htmlFor="token">Token</label>
         <input
-          id="firstName"
+          id="token"
           type="text"
-          name="firstName"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
+          name="token"
+          defaultValue={random}
+          onMouseOver={e => setToken(e.target.defaultValue)}
         />
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="data">Data</label>
         <input
-          id="lastName"
-          type="text"
-          name="lastName"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label htmlFor="salary">Salary ($)</label>
-        <input
-          id="salary"
-          type="number"
-          name="salary"
-          value={salary}
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
+          id="data"
           type="date"
-          name="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
+          name="data"
+          defaultValue={currentDate}
+          onMouseOver={e => setData(e.target.defaultValue)}
+        />
+        <label htmlFor="horaEntr">Hora Entrada</label>
+        <input
+          id="horaEntr"
+          type="time"
+          name="horaEntr"
+          defaultValue={today.getHours() + ':' + today.getMinutes()}
+          onMouseOver={e => setHoraEntr(e.target.defaultValue)}
         />
         <div style={{ marginTop: '30px' }}>
           <input type="submit" value="Add" />

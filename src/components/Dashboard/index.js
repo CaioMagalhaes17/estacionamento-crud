@@ -29,11 +29,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const handleDelete = id => {
     Swal.fire({
       icon: 'warning',
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Tem certeza?',
+      text: "Não é possível reverter essa ação!",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Não, cancelar!',
     }).then(result => {
       if (result.value) {
         const [employee] = employees.filter(employee => employee.id === id);

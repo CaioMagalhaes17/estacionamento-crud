@@ -39,8 +39,8 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
 
     Swal.fire({
       icon: 'success',
-      title: 'Updated!',
-      text: `${employee.firstName} ${employee.lastName}'s data has been updated.`,
+      title: 'Atualizado!',
+      text: `Hora de saída confirmada com sucesso.`,
       showConfirmButton: false,
       timer: 1500,
     });
@@ -58,15 +58,6 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
           defaultValue={token}
           readOnly
           onMouseOver={e => setToken(e.target.defaultValue)}
-        />
-        <label htmlFor="data">Data</label>
-        <input
-          id="data"
-          type="date"
-          name="data"
-          readOnly
-          defaultValue={data}
-          onMouseOver={e => setData(e.target.defaultValue)}
         />
         <label htmlFor="horaEntr">Hora Entrada</label>
         <input
@@ -86,7 +77,7 @@ const Edit = ({ employees, selectedEmployee, setEmployees, setIsEditing }) => {
           onChange={e => setHoraSaida(e.target.value)}
         />
         <div style={{ marginTop: '30px' }}>
-          <input type="submit" value="Update" />
+          <input type="submit" value="Marcar hora" />
           <input
             style={{ marginLeft: '12px' }}
             className="muted-button"

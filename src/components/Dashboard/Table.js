@@ -50,14 +50,14 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
                     onClick={() => handleDelete(employee.id)}
                     className="button muted-button"
                   >
-                    Delete
+                    Apagar
                   </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={7}>No Employees</td>
+              <td colSpan={7}>Sem registros</td>
             </tr>
           )}
         </tbody>

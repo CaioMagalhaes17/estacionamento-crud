@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import md5 from 'md5';
 
-const random = md5(Math.floor(Math.random() * 6) + 1);
-var today = new Date();
-var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); 
+
 
 const Add = ({ employees, setEmployees, setIsAdding }) => {
   const [token, setToken] = useState('');
   const [data, setData] = useState('');
   const [horaEntr, setHoraEntr] = useState('');
+
+  var today = new Date();
+  const random = md5(today.getSeconds());
+  console.log(random);
+  var currentDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); 
 
   const handleAdd = e => {
     e.preventDefault();
@@ -59,7 +62,7 @@ const Add = ({ employees, setEmployees, setIsAdding }) => {
           type="date"
           name="data"
           defaultValue={currentDate}
-          onMouseOver={e => setData(e.target.defaultValue)}
+          onMouseOver={e => setData(today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear())}
         />
         <label htmlFor="horaEntr">Hora Entrada</label>
         <input
